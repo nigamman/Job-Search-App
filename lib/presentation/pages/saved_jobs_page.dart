@@ -92,15 +92,40 @@ class SavedJobsPage extends StatelessWidget {
                       color: subtitleColor,
                     ),
                   ),
-                  trailing: Icon(Icons.bookmark, color: iconColor),
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => JobDetailPage(job: job),
-                      ),
-                    );
-                  },
+                  trailing: IconButton(
+                    icon: const Icon(Icons.delete_outline),
+                    color: Colors.redAccent,
+                    tooltip: 'Remove from saved',
+                    onPressed: () async {
+                      final shouldRemove = await showDialog<bool>(
+                        context: context,
+                        builder: (context) => AlertDialog(
+                          title: const Text('Remove Job?'),
+                          content: const Text('Are you sure you want to remove this job from your saved list?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, false),
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, true),
+                              child: const Text('Remove', style: TextStyle(color: Colors.red)),
+                            ),
+                          ],
+                        ),
+                      );
+
+                      if (shouldRemove ?? false) {
+                        context.read<SavedJobsCubit>().removeJob(job);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Job removed from saved'),
+                            duration: Duration(seconds: 1),
+                          ),
+                        );
+                      }
+                    },
+                  ),
                 ),
               );
             },

@@ -13,6 +13,15 @@ class SavedJobsCubit extends Cubit<List<Job>> {
     }
   }
 
+  void removeJob(Job job) {
+    final updated = state.where((j) => j.id != job.id).toList();
+    emit(updated);
+  }
+  void saveJob(Job job) {
+    final updated = [...state, job];
+    emit(updated);
+  }
+
   bool isSaved(Job job) {
     return state.contains(job);
   }

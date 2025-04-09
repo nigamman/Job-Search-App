@@ -51,7 +51,7 @@ class _JobListPageState extends State<JobListPage> {
               itemCount: state.jobs.length,
               itemBuilder: (context, index) {
                 final job = state.jobs[index];
-                final isSaved = savedJobsCubit.isSaved(job);
+                final isSaved = context.watch<SavedJobsCubit>().isSaved(job);
 
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
@@ -102,12 +102,27 @@ class _JobListPageState extends State<JobListPage> {
                     trailing: IconButton(
                       icon: Icon(
                         isSaved ? Icons.bookmark : Icons.bookmark_border,
-                        color: isSaved ? Colors.green : iconColor,
+                        color: isSaved ? Colors.green : Colors.grey,
                       ),
                       onPressed: () {
-                        setState(() {
-                          savedJobsCubit.toggleSaved(job);
-                        });
+                        final savedJobsCubit = context.read<SavedJobsCubit>();
+                        if (isSaved) {
+                          savedJobsCubit.removeJob(job);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Job removed from saved'),
+                              duration: Duration(seconds: 1),
+                            ),
+                          );
+                        } else {
+                          savedJobsCubit.saveJob(job);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Job saved successfully'),
+                              duration: Duration(seconds: 1),
+                            ),
+                          );
+                        }
                       },
                     ),
                     onTap: () {
