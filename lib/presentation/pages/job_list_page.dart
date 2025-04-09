@@ -31,16 +31,11 @@ class _JobListPageState extends State<JobListPage> {
     final Color cardTextColor = isDark ? Colors.white : Colors.black;
     final Color subtitleColor = isDark ? Colors.white70 : Colors.black54;
     final Color iconColor = isDark ? Colors.white : Colors.black87;
-    final Color avatarBgColor = isDark ? Colors.grey[800]! : Colors.grey.shade200;
-    final Color avatarTextColor = isDark ? Colors.green : Colors.deepOrange;
+    final Color avatarBgColor = isDark ? Colors.black : Colors.grey.shade200;
+    final Color avatarTextColor = isDark ? Colors.blueAccent : Colors.blueAccent;
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text('Job Listings'),
-        centerTitle: true,
-        backgroundColor: theme.primaryColor,
-      ),
       body: BlocBuilder<JobCubit, JobState>(
         builder: (context, state) {
           if (state is JobLoading) {
@@ -102,7 +97,7 @@ class _JobListPageState extends State<JobListPage> {
                     trailing: IconButton(
                       icon: Icon(
                         isSaved ? Icons.bookmark : Icons.bookmark_border,
-                        color: isSaved ? Colors.green : Colors.grey,
+                        color: isSaved ? Colors.blueAccent : Colors.grey,
                       ),
                       onPressed: () {
                         final savedJobsCubit = context.read<SavedJobsCubit>();

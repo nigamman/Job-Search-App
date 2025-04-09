@@ -16,15 +16,10 @@ class SavedJobsPage extends StatelessWidget {
     final Color subtitleColor = isDark ? Colors.white70 : Colors.black54;
     final Color iconColor = isDark ? Colors.white : Colors.black87;
     final Color avatarBgColor = isDark ? Colors.black : Colors.grey.shade200;
-    final Color avatarTextColor = isDark ? Colors.green : Colors.deepOrange;
+    final Color avatarTextColor = isDark ? Colors.blueAccent : Colors.blueAccent;
 
     return Scaffold(
       backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: AppBar(
-        title: const Text('Saved Jobs'),
-        backgroundColor: theme.primaryColor,
-        centerTitle: true,
-      ),
       body: BlocBuilder<SavedJobsCubit, List<Job>>(
         builder: (context, savedJobs) {
           if (savedJobs.isEmpty) {

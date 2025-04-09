@@ -31,13 +31,14 @@ class JobBoardApp extends StatelessWidget {
     return BlocBuilder<ThemeCubit, ThemeMode>(
       builder: (context, themeMode) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Job Board',
           themeMode: themeMode,
           theme: ThemeData.light().copyWith(
-            primaryColor: Colors.deepOrange,
-            appBarTheme: const AppBarTheme(
-              backgroundColor: Colors.deepOrange,
-              foregroundColor: Colors.white,
+            primaryColor: Colors.blue,
+            appBarTheme: AppBarTheme(
+              backgroundColor: Colors.blue[300],
+              foregroundColor: Colors.black,
             ),
           ),
           darkTheme: ThemeData.dark(),

@@ -28,8 +28,8 @@ A simple Job Listing App built using Flutter for Lean Product Studio's internshi
 
 ## Requirements
 
-- Flutter SDK 3.x.x or later
-- Dart 3.x.x
+- Flutter SDK 3.24.4 
+- Dart 3.5.4
 - Run `flutter pub get` before building
 
 ## Run
